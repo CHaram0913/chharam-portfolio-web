@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
 const bodyParser = require('body-parser');
-const {createLogger, format, transports} = require('winston');
-const {combine, timestamp, prettyPrint} = format;
+const envResult = require('dotenv').config();
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, prettyPrint } = format;
 const CONFIGS = process.env.ENV === 'prod' ?
     require('./configs/production') :
     process.env.ENV === 'dev' ?
@@ -12,10 +13,9 @@ const CONFIGS = process.env.ENV === 'prod' ?
 
 /**
  * Logger Setting
- * */
+ **/
 const logger = createLogger({
     format: combine(
-        // label({label:'label test'}),
         timestamp(),
         prettyPrint()
     ),
@@ -26,13 +26,13 @@ const app = express();
 
 /**
  * Mongo Setup
- * */
+ **/
 mongoose.Promise = global.Promise;
 mongoose.connect(CONFIGS.MONGO_URI);
 
 /**
  * Middlewares
- * */
+ **/
 app.use(bodyParser.json());
 app.use(expressSession({
     secret: CONFIGS.SESSION_SECRET,
@@ -50,7 +50,7 @@ app.use(expressSession({
 
 /**
  * Start
- * */
+ **/
 app.listen(CONFIGS.PORT, () => {
     logger.info(`Server Running at PORT : ${CONFIGS.PORT}`);
 });

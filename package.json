@@ -1,7 +1,7 @@
 {
-  "name": "Ecommerce-Demo",
+  "name": "MERN-stack-boilerplate",
   "version": "1.0.0",
-  "description": "Ecommerce Demo",
+  "description": "Simple boilerplate for MERN-stack web app",
   "main": "server.js",
   "scripts": {
     "test": "npm run test",
@@ -11,8 +11,7 @@
     "lint": "eslint ./ --fix"
   },
   "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/serendipity1004/MERN-portfolio-materialui.git"
+    "type": "git"
   },
   "keywords": [
     "React",
@@ -22,19 +21,14 @@
     "MongoDB",
     "Boilerplate"
   ],
-  "author": "Ji Ho Choi",
+  "author": "Haram Choi",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/serendipity1004/MERN-portfolio-materialui/issues"
-  },
-  "homepage": "https://github.com/serendipity1004/MERN-portfolio-materialui#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "mongoose": "^5.0.7",
-    "passport": "^0.4.0",
+    "mongoose": "^5.1.4",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {

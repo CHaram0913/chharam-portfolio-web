@@ -1,4 +1,0 @@
-Dependencies
-
---Dev
-Concurrently, Nodemon

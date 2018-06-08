@@ -1,12 +1,11 @@
 /**
  * Root
- * */
+ **/
 import RootRoute from './root/root';
 
 /**
- * Exports
- * */
-
+ * Export Every Routes as mainRoutes
+ **/
 const mainRoutes = [
     {
         path: '/',

@@ -1,10 +1,8 @@
-import React from 'react';
-import {withStyles} from 'material-ui/styles';
-import {ProgressCarousel} from '../../components';
+import React, { Fragment } from 'react';
 
-const styles = (theme) => ({
-    root: {},
-});
+import { withStyles } from '@material-ui/core/styles';
+import { Paper, Typography } from '@material-ui/core';
+import { RootRouteStyle } from './../../styles';
 
 /**
  * Root
@@ -15,11 +13,15 @@ class Root extends React.Component {
      */
     render() {
         return (
-            <div>
-                <ProgressCarousel/>
-            </div>
+            <Fragment>
+                <Paper>
+                    <Typography variant='display1'>
+                        Hello World
+                    </Typography>
+                </Paper>
+            </Fragment>
         );
     }
 }
 
-export default withStyles(styles)(Root);
+export default withStyles (RootRouteStyle) (Root);

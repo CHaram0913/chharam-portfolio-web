@@ -1,12 +1,12 @@
-import React from 'react';
-import {Router, Route, Switch} from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
 import history from '../services/history';
-import {mainRoutes} from '../routes';
-import Reboot from 'material-ui/Reboot';
+import { mainRoutes } from '../routes';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 /**
  * Pages
- * */
+ **/
 
 const mainSwitch = (
     <Switch>
@@ -20,19 +20,19 @@ const mainSwitch = (
 
 /**
  * App
- */
+ **/
 export default class App extends React.Component {
     /**
      * @return {jsx}
-     */
+     **/
     render() {
         return (
-            <div>
-                <Reboot/>
+            <Fragment>
+                <CssBaseline />
                 <Router history={history}>
                     {mainSwitch}
                 </Router>
-            </div>
+            </Fragment>
         );
     }
 }
