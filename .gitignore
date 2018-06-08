@@ -5,20 +5,20 @@
 .env
 
 # Node Modules
-node_modules
+node_modules/
 
 ##Client Side
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-client/node_modules
+client/node_modules/
 
 # testing
-client/coverage
+client/coverage/
 
 # production
-client/build
+client/build/
 
 # misc
 client/.DS_Store

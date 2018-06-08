@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const expressSession = require('express-session');
 const bodyParser = require('body-parser');
 const envResult = require('dotenv').config();
@@ -23,12 +22,6 @@ const logger = createLogger({
 });
 
 const app = express();
-
-/**
- * Mongo Setup
- **/
-mongoose.Promise = global.Promise;
-mongoose.connect(CONFIGS.MONGO_URI);
 
 /**
  * Middlewares

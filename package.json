@@ -1,7 +1,7 @@
 {
-  "name": "MERN-stack-boilerplate",
+  "name": "chharam-portfolio",
   "version": "1.0.0",
-  "description": "Simple boilerplate for MERN-stack web app",
+  "description": "My first web portfolio",
   "main": "server.js",
   "scripts": {
     "test": "npm run test",
@@ -17,9 +17,7 @@
     "React",
     "Material",
     "UI",
-    "NodeJS",
-    "MongoDB",
-    "Boilerplate"
+    "NodeJS"
   ],
   "author": "Haram Choi",
   "license": "MIT",
@@ -28,7 +26,6 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "mongoose": "^5.1.4",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {
