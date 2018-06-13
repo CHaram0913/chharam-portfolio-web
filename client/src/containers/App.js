@@ -1,27 +1,74 @@
-import React, { Fragment } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { Router, Route, Switch ,Redirect } from 'react-router-dom';
+import { spring, AnimatedSwitch } from 'react-router-transition';
 import history from '../services/history';
 import { mainRoutes } from '../routes';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import { Navbar } from './../components';
+
+/**
+ * Animation Props
+ **/
+function mapStyles(styles) {
+    return {
+      opacity: styles.opacity,
+      transform: `scale(${styles.scale})`,
+    };
+}
+
+function bounce(val) {
+    return spring(val, {
+      stiffness: 330,
+      damping: 22,
+    });
+}
+
+const bounceTransition = {
+    atEnter: {
+      opacity: 0,
+      scale: 1.2,
+    },
+    atLeave: {
+      opacity: bounce(0),
+      scale: bounce(0.8),
+    },
+    atActive: {
+      opacity: bounce(1),
+      scale: bounce(1),
+    },
+};
+
 /**
  * Pages
  **/
-
 const mainSwitch = (
-    <Switch>
-        {mainRoutes.map(function(item, index) {
-            return (
-                item.wrapper ? 'Something else' : <Route key={index} path={item.path} component={item.component}/>
-            );
+    <AnimatedSwitch
+        atEnter={bounceTransition.atEnter}
+        atLeave={bounceTransition.atLeave}
+        atActive={bounceTransition.atActive}
+        mapStyles={mapStyles}
+        className='route-wrapper'
+    >
+        {mainRoutes.map(function (item, index) {
+            if (!index) {
+                return (
+                    <Route exact key={index} path={item.path} component={item.component} />
+                )
+            } else {
+                return (
+                    <Route key={index} path={item.path} component={item.component} />
+                )
+            }
         })}
-    </Switch>
+        <Redirect to={'/'} />
+    </AnimatedSwitch>
 );
 
 /**
  * App
  **/
-export default class App extends React.Component {
+export default class App extends Component {
     /**
      * @return {jsx}
      **/
@@ -30,7 +77,10 @@ export default class App extends React.Component {
             <Fragment>
                 <CssBaseline />
                 <Router history={history}>
-                    {mainSwitch}
+                    <Fragment>
+                        <Navbar />
+                        {mainSwitch}
+                    </Fragment>
                 </Router>
             </Fragment>
         );

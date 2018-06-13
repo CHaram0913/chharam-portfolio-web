@@ -26,6 +26,7 @@ const app = express();
 /**
  * Middlewares
  **/
+app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(expressSession({
     secret: CONFIGS.SESSION_SECRET,

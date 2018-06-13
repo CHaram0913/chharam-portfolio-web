@@ -1,0 +1,1 @@
+export const CHANGE_PORTFOLIO_SLIDE_INDEX = 'change_portfolio_slide_index';
