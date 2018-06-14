@@ -1,25 +1,28 @@
 import React, { Component, Fragment } from 'react';
+import { Motion, spring } from 'react-motion';
+import history from './../../services/history';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Grid } from '@material-ui/core';
 import { RootRouteStyle } from './../../styles';
-
-import CONFIG from './../../config';
 
 /**
  * Root
  */
 class Root extends Component {
     state = {
-        detailActive: false
+        detailActive: 0
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.state.detailActive >= 2) {
+            this.setState({ detailActive: 0 });
+            history.push('/Resume');
+        }
     }
 
     handleProfileClick = (isActive) => e => {
-        if (isActive) {
-            this.setState({ detailActive: false });
-        } else {
-            this.setState({ detailActive: true });
-        }
+        this.setState({ detailActive: isActive + 1 });
     }
 
     renderProfile(classes) {
@@ -42,7 +45,7 @@ class Root extends Component {
                         I am a <span style={{ color: '#FFDEDE' }}>web developer</span>, <span style={{ color: '#BCFFFF' }}>chemical engineer</span> and <b>enthusiastic learner</b>.
                     </Typography>
                     <Typography className={classes.detail2}>
-                        I started programming after graduating Imperial College London and fell in love with it. <i><b>Click</b></i> on the image if you wish to see a brief summary about me. Navigate to <a href='http://localhost:3000/Resume' className={classes.resume_link}><i>RESUME</i></a> if you want some details.
+                        <i><b>CLICK</b></i> on the image for details. You can click it more than <i><b>ONCE</b></i>!
                     </Typography>
                 </Paper>
             </Fragment>
@@ -60,44 +63,67 @@ class Root extends Component {
             return (
                 <Fragment>
                     <Grid container alignItems='center' justify='center' className={classes.root} zeroMinWidth>
-                        <Grid item xs={5} className={classes.profile} zeroMinWidth>
-                            {this.renderProfile(classes)}
-                        </Grid>
+                        <Motion 
+                            defaultStyle={{ x: 200 }} 
+                            style={{ x: spring(0) }}
+                        >
+                            {style => (
+                                <Grid item xs={5} className={classes.profile} zeroMinWidth>
+                                    <div style={{ transform: `translateX(${style.x}px)` }}>
+                                        {this.renderProfile(classes, style)}
+                                    </div>
+                                </Grid>
+                            )}
+                        </Motion>
 
-                        <Grid item xs={4} className={classes.summary_container_grid} zeroMinWidth>
-                            <Paper className={classes.summary_container_paper}>
-                                <Typography className={classes.summary_subheading}>
-                                    University
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    Imperial College London
-                                </Typography>
-                                <Typography className={classes.summary_subheading}>
-                                    University
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    Imperial College London
-                                </Typography>
-                                <Typography className={classes.summary_subheading}>
-                                    Degree
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    Masters in Chemical Engineering (M.Eng)
-                                </Typography>
-                                <Typography className={classes.summary_subheading}>
-                                    Language Proficiency
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    English (fluent)
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    Korean (native)
-                                </Typography>
-                                <Typography className={classes.summary_detail}>
-                                    Japanese (conversational)
-                                </Typography>
-                            </Paper>
-                        </Grid>
+                        <Motion 
+                            defaultStyle={{ x: 700, opacity: 0 }} 
+                            style={{ x: spring(0), opacity: spring(1) }}
+                        >
+                            {style => (
+                                <Grid item xs={4} className={classes.summary_container_grid} zeroMinWidth>
+                                    <Paper 
+                                        className={classes.summary_container_paper}
+                                        style={{
+                                            transform: `translateX(${style.x}px)`,
+                                            opacity: style.opacity
+                                        }}
+                                    >
+                                        <Typography className={classes.summary_subheading}>
+                                            Email
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            CHaram0913@gmail.com
+                                        </Typography>
+                                        <Typography className={classes.summary_subheading}>
+                                            University
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            Imperial College London
+                                        </Typography>
+                                        <Typography className={classes.summary_subheading}>
+                                            Degree
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            Masters in Chemical Engineering (M.Eng)
+                                        </Typography>
+                                        <Typography className={classes.summary_subheading}>
+                                            Language Proficiency
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            English (fluent)
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            Korean (native)
+                                        </Typography>
+                                        <Typography className={classes.summary_detail}>
+                                            Japanese (conversational)
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                            )}
+                            
+                        </Motion>
                     </Grid>
                 </Fragment>
             )

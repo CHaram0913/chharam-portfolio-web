@@ -7,9 +7,9 @@ export default theme => ({
     my_name: {
         color: 'white',
         textAlign: 'center',
-        margin: '10px 0',
+        margin: '5px 0 0 0',
         fontSize: 90,
-        fontFamily: 'Indie Flower, cursive',
+        fontFamily: 'Rajdhani, sans-serif',
     },
     title_container: {
         textAlign: 'center',
@@ -25,9 +25,10 @@ export default theme => ({
         backgroundPosition:'center top',
         backgroundRepeat:'no-repeat',
         backgroundSize:'100%',
+        cursor: 'pointer',
     },
     detail_container: {
-        backgroundColor: 'rgba(40, 44, 52, 1)',
+        background: 'none',
         height: 'auto',
         width: '700px',
         margin: 'auto',

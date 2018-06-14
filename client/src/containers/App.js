@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Router, Route, Switch ,Redirect } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 import history from '../services/history';
 import { mainRoutes } from '../routes';

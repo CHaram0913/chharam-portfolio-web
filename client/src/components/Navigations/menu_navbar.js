@@ -12,22 +12,29 @@ class Navbar extends Component {
         index: 0,
     }
 
+    componentDidUpdate() {
+        this.updateMenuIndex();
+    }
+
+    componentWillMount() {
+        this.updateMenuIndex();
+    }
+
+    updateMenuIndex = () => {
+        let initialLocationArray = window.location.href.split('/');
+        let initialLocation = initialLocationArray[initialLocationArray.length - 1];
+        if (initialLocation.length && this.state.index !== menuArray.indexOf(initialLocation)) {
+            this.setState({ index: menuArray.indexOf(initialLocation) });
+        }
+    }
+
     onMenuSelection = index => e => {
         this.setState({ index })
     }
 
-    componentWillMount() {
-        let initialLocationArray = window.location.href.split('/');
-        let initialLocation = initialLocationArray[initialLocationArray.length - 1];
-        if (!initialLocation.length){
-            this.setState({ index: 0 });
-        } else {
-            this.setState({ index: menuArray.indexOf(initialLocation) })
-        }
-    }
-
     render() {
         const { classes } = this.props;
+
         return (
             <Paper className={classes.root} elevation={0}>
                 <Tabs

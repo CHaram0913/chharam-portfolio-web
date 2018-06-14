@@ -1,5 +1,6 @@
 import menuArray from './Navigations/menu_array';
 import portfolioArray from './Portfolio/portfolio_list';
+import resumeBodiesArray from './Resume/resume_bodies';
 
 /**
  * Export Everything
@@ -7,5 +8,6 @@ import portfolioArray from './Portfolio/portfolio_list';
 
 export {
     menuArray,
-    portfolioArray
+    portfolioArray,
+    resumeBodiesArray
 };
