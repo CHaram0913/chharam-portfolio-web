@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { StaggeredMotion, spring } from 'react-motion';
+import { StaggeredMotion, TransitionMotion, spring, presets } from 'react-motion';
 import history from './../../services/history';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core';
 import { ResumeRouteStyle } from './../../styles';
 
-import { resumeBodiesArray } from './../../resources';
+import { resumeBodiesArray, resumeDetailsArray } from './../../resources';
 
 Object.prototype.checkForTrue = function() {
     for (let i in this) {
@@ -53,13 +53,43 @@ class Timeline extends Component {
         this.setState({ [resume_detail]: !this.state[resume_detail] });
     }
 
+    getDefaultStyles = () => {
+        return resumeDetailsArray.map(detail => ({ ...detail, style: { opacity: 0 } }));
+    }
+
+    getStyles = (childState) => {
+        return resumeDetailsArray.map(detail => {
+            let childStateNum;
+
+            if (childState[detail.key]) {
+                childStateNum = 1;
+            } else {
+                childStateNum = 0;
+            }
+
+            return (
+                { ...detail, style: { opacity: spring(1 * childStateNum, presets.gentle) } }
+            )});
+    }
+
+    willEnter() {
+        return {
+            opacity: 0,
+        };
+    }
+
+    willLeave() {
+        return {
+            opacity: spring(0),
+        }
+    }
+
     /**
      * @return {jsx}
      */
 
     render() {
         const { classes } = this.props;
-        console.log(this.state)
 
         return (
             <Fragment>
@@ -126,6 +156,29 @@ class Timeline extends Component {
                         </Fragment>
                     )}
                 </StaggeredMotion>
+                <TransitionMotion
+                    defaultStyles={this.getDefaultStyles()}
+                    styles={this.getStyles(this.state)}
+                    willLeave={this.willLeave}
+                    willEnter={this.willEnter}
+                >
+                    {styles => (
+                        <Fragment>
+                            {styles.map(({ style, key, data }) => (
+                                <Paper style={{ background: 'none', width: '400px', height: '100px', opacity: style.opacity }}>
+                                    {data.map(singleSubdata => (
+                                        <Typography
+                                            style={{ color: 'white' }}
+                                            key={singleSubdata.subkey}
+                                        >
+                                            {singleSubdata.subdata}
+                                        </Typography>
+                                    ))}
+                                </Paper>
+                            ))}
+                        </Fragment>
+                    )}
+                </TransitionMotion>
             </Fragment>
         );
     }
